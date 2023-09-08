@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTaskContext } from '../context/TaskContext';
 
-function TaskForm() {
+export default function TaskForm() {
   const { addTask } = useTaskContext();
   const [newTask, setNewTask] = useState('');
 
@@ -14,7 +14,7 @@ function TaskForm() {
 
   return (
     <div>
-      <h2>Add Task</h2>
+      <h1>Add Task</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -28,4 +28,3 @@ function TaskForm() {
   );
 }
 
-export default TaskForm;

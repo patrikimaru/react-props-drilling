@@ -1,15 +1,9 @@
-import { useState } from 'react';
+import TaskUpdateForm from './TaskUpdateForm';
 import { useTaskContext } from '../context/TaskContext';
+import { IoCheckmarkCircleOutline } from "react-icons/io5";
 
-function TaskList() {
+export default function TaskList() {
   const { tasks, completeTask, updateTask } = useTaskContext();
-  const [updatedTitle, setUpdatedTitle] = useState(''); 
-
-  const handleUpdateTask = (taskId) => {
-    if (updatedTitle.trim() === '') return; 
-    updateTask(taskId, { title: updatedTitle });
-    setUpdatedTitle(''); 
-  };
 
   return (
     <div>
@@ -17,20 +11,15 @@ function TaskList() {
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
-            {task.title}{' '}
-            <button onClick={() => completeTask(task.id)}>Complete</button>
-            <input
-              type="text"
-              placeholder="New Task Title"
-              value={updatedTitle}
-              onChange={(e) => setUpdatedTitle(e.target.value)}
-            />
-            <button onClick={() => handleUpdateTask(task.id)}>Update</button>
+            <div className='header'>
+              {task.title}{' '}
+              <IoCheckmarkCircleOutline onClick={() => completeTask(task.id)} />
+            </div>
+            <br />
+            <TaskUpdateForm task={task} updateTask={updateTask} />
           </li>
         ))}
       </ul>
     </div>
   );
 }
-
-export default TaskList;

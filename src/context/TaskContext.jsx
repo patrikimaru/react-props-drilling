@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const TaskContext = createContext();
 
@@ -17,6 +17,7 @@ export function TaskProvider({ children }) {
   };
 
   const completeTask = (taskId) => {
+    alert("Are you sure you completed this task?")
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(updatedTasks);
   };
@@ -26,8 +27,8 @@ export function TaskProvider({ children }) {
       {children}
     </TaskContext.Provider>
   );
-}
+};
 
 export function useTaskContext() {
   return useContext(TaskContext);
-}
+};
